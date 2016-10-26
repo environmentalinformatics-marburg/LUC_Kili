@@ -1,12 +1,19 @@
 ################################################################################
 #Model training
 ################################################################################
+scene <- 204# oder 802
 mainpath <- "/media/memory01/data/hmeyer/LUC_Kili/"
+#mainpath <- "/media/hanna/data/LUC_Kili/"
+
+filepath_model <- paste0(filepath_base,"modeldata/")
+filepath_raster <- paste0(filepath_base,"raster/scene_",scene,"/")
+filepath_results <- paste0(filepath_base,"results/")
+filepath_prediction <- paste0(filepath_results,"prediction/")
 
 library(doParallel)
 library(caret)
 
-load(paste0(mainpath,"datatrain_df.rda"))
+load(paste0(filepath_model,"datatrain_df_",scene,".rda"))
 
 train.df$class <- factor(train.df$class)
 
@@ -20,7 +27,7 @@ trainIndex <- createDataPartition(train.df$class,
 
 trainData <- train.df[trainIndex,]
 testData <- train.df[-trainIndex,]
-save(testData,file=paste0(mainpath,"testData.RData"))
+save(testData,file=paste0(filepath_model,"testData_",scene,".RData"))
 
 ### define predictors and response
 predictors <- trainData[,2:17]
@@ -39,4 +46,4 @@ set.seed(500)
 model <- train(predictors, response, method = "rf",
                tuneLength = 5, trControl=ctrl)
 stopCluster(cl)
-save(model,file=paste0(mainpath,"rfModel.RData"))
+save(model,file=paste0(filepath_model,"rfModel_",scene,".RData"))
