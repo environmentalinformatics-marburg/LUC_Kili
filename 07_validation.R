@@ -1,10 +1,11 @@
-###validation
+# validation of the random forest model
+
 rm(list=ls())
 library(Rsenal)
 library(caret)
 
 scene <- 204# oder 802
-mainpath <- "/media/memory01/data/hmeyer/LUC_Kili/"
+filepath_base <- "/media/memory01/data/hmeyer/LUC_Kili/"
 #mainpath <- "/media/hanna/data/LUC_Kili/"
 
 filepath_model <- paste0(filepath_base,"modeldata/")

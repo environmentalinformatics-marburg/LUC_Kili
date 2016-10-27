@@ -1,8 +1,13 @@
+# prediction of Landuse Classification for the whole Rasterimage
+
 library(raster)
 library(caret)
 # Read perfect sensor
 scene <- 204 # oder 802
 filepath_base <- "/media/hanna/data/LUC_Kili/"
+
+#######################
+
 filepath_model <- paste0(filepath_base,"modeldata/")
 filepath_raster <- paste0(filepath_base,"raster/scene_",scene,"/")
 filepath_results <- paste0(filepath_base,"results/")
