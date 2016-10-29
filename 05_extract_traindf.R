@@ -35,7 +35,7 @@ load(paste0(filepath_raster,"perfect_sensor.rda"))
 
 projection(perfect_sensor)
 projection(trainingsites)
-spTransform(trainingsites, crs(perfect_sensor))
+trainingsites <- spTransform(trainingsites, crs(perfect_sensor))
 
 train.df <- extract(perfect_sensor, trainingsites, df = TRUE)
 
