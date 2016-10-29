@@ -6,12 +6,25 @@ library(rgdal)
 library(caret)
 library(Rsenal)
 
-scene <- 204# oder 802
-filepath_base <- "/media/benjamin/XChange/Masterarbeit/LUC_Kili/"
+scene <- 802# oder 204
+filepath_base <- "/media/dogbert/XChange/Masterarbeit/LUC_Kili/"
 #mainpath <- "/media/hanna/data/LUC_Kili/"
 filepath_model <- paste0(filepath_base,"modeldata/")
 filepath_raster <- paste0(filepath_base,"raster/scene_",scene,"/")
 filepath_vector <- paste0(filepath_base,"vector/scene_",scene,"/")
+
+all_tr_areas <-  readOGR(paste0(filepath_vector,"all_tr_areas/all_training_areas.shp"), 
+                         layer = "all_training_areas")
+
+all_tr_areas <- all_tr_areas[all_tr_areas$DN != 57,]
+all_tr_areas <- all_tr_areas[all_tr_areas$DN != 58,]
+all_tr_areas <- all_tr_areas[all_tr_areas$DN != 59,]
+all_tr_areas <- all_tr_areas[all_tr_areas$DN != 63,]
+all_tr_areas <- all_tr_areas[all_tr_areas$DN != 64,]
+writeOGR(all_tr_areas, paste0(filepath_vector,"/trainingsites_cleaned/cleaned_trainingsites.shp"), 
+        layer = "cleaned_trainingsites", driver = "ESRI Shapefile")
+# die klasse 57 für wolken wird manuell nach diesem befehl hinzugefügt
+
 
 # read shapelayer training sites
 trainingsites <- readOGR(paste0(filepath_vector,"/trainingsites_cleaned/cleaned_trainingsites.shp"), 
@@ -22,7 +35,7 @@ load(paste0(filepath_raster,"perfect_sensor.rda"))
 
 projection(perfect_sensor)
 projection(trainingsites)
-#spTransform(trainingsites, crs(perfect_sensor))
+spTransform(trainingsites, crs(perfect_sensor))
 
 train.df <- extract(perfect_sensor, trainingsites, df = TRUE)
 

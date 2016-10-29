@@ -1,4 +1,4 @@
-# Resample Raster Data - create lookup table, resample testdata, resample trainingraster
+# Resample Raster Data - create lookup table, resample testdata, resample trainingraster # create kappastatistic
 
 
 library(raster)
