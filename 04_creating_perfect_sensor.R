@@ -20,5 +20,5 @@ bands_st <- stack(fls_bands)
 
 
 perfect_sensor <- stack(add_st,bands_st)
-load(perfect_sensor, paste0(filepath_raster,"perfect_sensor.rda"))
+save(perfect_sensor, paste0(filepath_raster,"perfect_sensor.rda"))
 

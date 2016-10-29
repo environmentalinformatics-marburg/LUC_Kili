@@ -1,7 +1,7 @@
 # Compute artifical images for merged sentinel images
 
 scene <- 802# oder 802
-filepath_base <- "/media/benjamin/XChange/Masterarbeit/LUC_Kili/"
+filepath_base <- "/media/dogbert/XChange/Masterarbeit/LUC_Kili/"
 
 
 
@@ -38,8 +38,8 @@ lst_fcl <- lapply(fls, function(i) {
   rst <- raster(i)
   
   # calculate focal mean and standard deviation
-  fls_mn <- gsub("IMG","focal_mean", i)
-  fls_sd <- gsub("IMG", "focal_sd", i)
+  fls_mn <- paste0(filepath_addBands, "PCA",scene,"_focal_mean.img")
+  fls_sd <- paste0(filepath_addBands, "PCA",scene,"_focal_sd.img")
   
   focal(rst, w = w, fun = mean, na.rm = TRUE, pad = TRUE,
         filename = fls_mn, format = "HFA", overwrite = TRUE)
