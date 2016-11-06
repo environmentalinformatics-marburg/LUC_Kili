@@ -7,7 +7,7 @@ library(Rsenal)
 library(caret)
 
 
-scene <- 204# oder 802
+scene <- 802# oder 204
 filepath_base <- "/media/dogbert/XChange/Masterarbeit/LUC_Kili/"
 #mainpath <- "/media/hanna/data/LUC_Kili/"
 
@@ -41,11 +41,10 @@ colnames(look_up_df)<- c("prediction", "agg1_pred")
 testData <- join(testData,look_up_df, by="prediction")
 
 kappastat <- kstat(testData$agg1,testData$agg1_pred)
-#########################################################
-
-
 pred2_rst <- raster(paste0(filepath_prediction, "classification_", scene, "_agg.tif"))
 names(pred2_rst)
+
+#########################################################
 
 look_up_df2 <- read.csv(paste0(filepath_lookuptables, "lookuptable_agg2.csv"))
 
